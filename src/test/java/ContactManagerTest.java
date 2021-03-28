@@ -57,7 +57,7 @@ class ContactManagerTest {
     @Test
     public void ShouldAllContactDetailsBeEqual() {
         Assertions.assertAll("Should return correct details",
-                () -> Assertions.assertEquals("Daniel", contact.getFirstName()),
+                () -> Assertions.assertEquals("Danie", contact.getFirstName()),
                 () -> Assertions.assertEquals("Lysak", contact.getLastName()),
                 () -> Assertions.assertEquals("0226291301", contact.getPhoneNumber())
         );
