@@ -3,8 +3,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-
 class ContactManagerTest {
 
     ContactManager manager; // setup, initiate objects before each ... for setup
