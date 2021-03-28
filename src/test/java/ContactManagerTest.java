@@ -31,7 +31,7 @@ class ContactManagerTest {
     @Test
     public void ShouldNotCreateWhenFirstNameNull() {
         Assertions.assertThrows(RuntimeException.class, () -> {
-            manager.addContact(null, "lysak", "0226291301");
+            manager.addContact(null, "Lysak", "0226291301");
         });
     }
 
@@ -57,8 +57,8 @@ class ContactManagerTest {
     @Test
     public void ShouldAllContactDetailsBeEqual() {
         Assertions.assertAll("Should return correct details",
-                () -> Assertions.assertEquals("Danie", contact.getFirstName()),
-                () -> Assertions.assertEquals("Lysak", contact.getLastName()),
+                () -> Assertions.assertEquals("Daniel", contact.getFirstName()),
+                () -> Assertions.assertEquals("Lysa", contact.getLastName()),
                 () -> Assertions.assertEquals("0226291301", contact.getPhoneNumber())
         );
 
