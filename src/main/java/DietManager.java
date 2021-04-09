@@ -1,9 +1,11 @@
-public class DietManager {
-    public Error areCompatible(Person person, Diet diet) {
-        return new Error("Not implemented");
-    }
+import java.util.ArrayList;
 
-    public Error randomDiet(Person person, Food[] foods) {
-        return new Error("Not implemented");
+public class DietManager {
+
+    public boolean areCompatible(Person person, Diet diet) {
+        return true;
+    }
+    public boolean randomDiet(Person person, ArrayList<Food> foods) {
+        return false;
     }
 }

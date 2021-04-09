@@ -8,5 +8,4 @@ class FoodTest {
     public void init(){
 
     }
-
 }

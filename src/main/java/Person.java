@@ -1,9 +1,8 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class Person {
     private Food favoriteFood;
-    private List<Food> allergies = new ArrayList<>();
+    private List<Food> allergies;
     private Diet diet;
     private float weight;
 
@@ -30,7 +29,6 @@ public class Person {
         this.favoriteFood = favoriteFood;
     }
 
-
     public Diet getDiet() {
         return diet;
     }
@@ -39,10 +37,11 @@ public class Person {
         this.diet = diet;
     }
 
-    public float getWeight() {
+    public float getWeightKg() {
         return weight;
     }
 
-
-
+    public void setWeightKg(float weight) {
+        this.weight = weight;
+    }
 }
