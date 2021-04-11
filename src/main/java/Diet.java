@@ -9,18 +9,19 @@ public abstract class Diet {
     public Diet(int daysDuration, String purpose, List<Food> allowedFood, boolean isVegan) {
         this.daysDuration = daysDuration;
         this.purpose = purpose;
-        this.allowedFood = allowedFood; // this.allowedFood.add(allowedFood)? er vi sikre på at det er en liste man skal legge til i construktør?
+        this.allowedFood = allowedFood; // this.allowedFood.add(allowedFood) maybe?
         this.isVegan = isVegan;
-        DietManager.calculateDuration(daysDuration);
+        DietManager.hasOnlyVeganFood(allowedFood);
     }
 
     public String writeDuration(){
+        DietManager.calculateDuration(daysDuration);
         return "Duration in string";
     }
     public String writeAllowedFood(){
+        DietManager.checkAllowedFood(allowedFood);
         return "return allowed food as string";
     }
-
 
     public int getDaysDuration() {
         return daysDuration;

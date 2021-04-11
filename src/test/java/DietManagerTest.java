@@ -2,8 +2,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class DietManagerTest {
 
     @BeforeEach
@@ -15,12 +13,17 @@ class DietManagerTest {
         @Test
        public void hasOnlyVeganFood() {
         }
+
         @Test
         void checkPreferredMeat() {
         }
 
         @Test
         void checkCarbCount() {
+        }
+
+        @Test
+        void restrictOnlyVeganFood(){
         }
     }
     @Nested
@@ -44,7 +47,7 @@ class DietManagerTest {
     }
 
         @Test
-        void calculateAllowedFood() {
+        void checkAllowedFood() {
         }
     }
     @Nested
