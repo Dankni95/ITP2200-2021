@@ -11,6 +11,10 @@ public class Person {
         this.allergies = allergies;
         this.diet = diet;
         this.weight = weight;
+        DietManager.checkPersonWeight(diet, weight);
+        DietManager.isPersonTooAllergic(diet, allergies);
+        DietManager.isPersonFavoriteFoodVegan(diet,favoriteFood);
+
     }
 
     public List<Food> getAllergies() {
@@ -29,9 +33,7 @@ public class Person {
         this.favoriteFood = favoriteFood;
     }
 
-    public Diet getDiet() {
-        return diet;
-    }
+    public Diet getDiet() { return diet; }
 
     public void setDiet(Diet diet) {
         this.diet = diet;
