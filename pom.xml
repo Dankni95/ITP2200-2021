@@ -31,6 +31,11 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>maven-unit-test</finalName>
