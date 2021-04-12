@@ -15,12 +15,38 @@ public class Person {
     }
     public void checkCompatibility(){}
 
-    public boolean minPersonWeight(Diet diet, float weight){return false;}
-    public boolean maxPersonWeight(Diet diet, float weight){return false;}
+    public boolean minPersonWeight(Diet d){
+        if (d instanceof LowCarbDiet){
+            LowCarbDiet l = (LowCarbDiet)d;
+            if (l.getMinWeightKg() > weight){
+                return false;
+            }
+        } if (d instanceof VeganDiet){
+            VeganDiet v = (VeganDiet)d;
+            if (v.getMinWeightKg() > weight){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean maxPersonWeight(Diet d){
+        if (d instanceof HypercaloricDiet){
+            HypercaloricDiet h = (HypercaloricDiet)d;
+            if (h.getMaxWeightKg() < weight){
+                return false;
+            }
+        }
+        return true;
+    }
 
     public boolean isPersonTooAllergic(Diet diet, List<Food> allergies){return true;}
 
-    public boolean isPersonFavoriteFoodVegan(Diet diet, Food favoriteFoods){return false;}
+    public boolean isVeganDietCompatible(Diet d){
+        if (!favoriteFood.isVegan() && d instanceof VeganDiet)
+            return false;
+        return true;
+    }
 
     public List<Food> getAllergies() {
         return allergies;
