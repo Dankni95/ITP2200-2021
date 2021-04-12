@@ -1,9 +1,9 @@
 
 public class Food {
-    String name;
-    float caloriesPer100g;
-    boolean isVegan;
-    FoodType type;
+    private String name;
+    private float caloriesPer100g;
+    private boolean isVegan;
+    private FoodType type;
 
     public Food(String name, float caloriesPer100g, boolean isVegan, FoodType type) {
         this.name = name;
@@ -11,8 +11,6 @@ public class Food {
         this.isVegan = isVegan;
         this.type = type;
     }
-
-
     public String getName() {
         return name;
     }
@@ -44,6 +42,4 @@ public class Food {
     public void setType(FoodType type) {
         this.type = type;
     }
-
-
 }
