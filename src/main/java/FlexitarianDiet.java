@@ -8,8 +8,10 @@ public class FlexitarianDiet extends Diet {
         super(daysDuration, purpose, allowedFood, isVegan);
         this.maxMeatGrams = maxMeatGrams;
         this.preferredMeat = preferredMeat;
-        DietManager.checkPreferredMeat(preferredMeat);
+        checkPreferredMeat(preferredMeat);
     }
+
+    public static void checkPreferredMeat(Food preferredMeat){}
 
     public float getMaxMeatGrams() {
         return maxMeatGrams;

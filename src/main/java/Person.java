@@ -11,11 +11,16 @@ public class Person {
         this.allergies = allergies;
         this.diet = diet;
         this.weight = weight;
-        DietManager.checkPersonWeight(diet, weight);
-        DietManager.isPersonTooAllergic(diet, allergies);
-        DietManager.isPersonFavoriteFoodVegan(diet,favoriteFood);
-
+        checkCompatibility();
     }
+    public void checkCompatibility(){}
+
+    public boolean minPersonWeight(Diet diet, float weight){return false;}
+    public boolean maxPersonWeight(Diet diet, float weight){return false;}
+
+    public boolean isPersonTooAllergic(Diet diet, List<Food> allergies){return true;}
+
+    public boolean isPersonFavoriteFoodVegan(Diet diet, Food favoriteFoods){return false;}
 
     public List<Food> getAllergies() {
         return allergies;
@@ -47,3 +52,4 @@ public class Person {
         this.weight = weight;
     }
 }
+
