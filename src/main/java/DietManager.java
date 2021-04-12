@@ -1,11 +1,16 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DietManager {
 
-    public boolean areCompatible(Person person, Diet diet) {
-        return true;
-    }
-    public boolean randomDiet(Person person, ArrayList<Food> foods) {
+
+    //4. A
+    public boolean areCompatible(Person person, Diet diet) { return true; }
+    //4. B
+    public boolean randomDiet(Person person, List<Food> foods) {
         return false;
     }
+
+
 }

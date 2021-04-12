@@ -6,7 +6,10 @@ public class VeganDiet extends Diet{
     public VeganDiet(int daysDuration, String purpose, List<Food> allowedFood, boolean isVegan, float minWeightKg) {
         super(daysDuration, purpose, allowedFood, isVegan);
         this.minWeightKg = minWeightKg;
+        restrictOnlyVeganFood(allowedFood);
     }
+
+    public static void restrictOnlyVeganFood(List<Food> foods){}
 
     public float getMinWeightKg() {
         return minWeightKg;
@@ -16,3 +19,6 @@ public class VeganDiet extends Diet{
         this.minWeightKg = minWeightKg;
     }
 }
+
+
+// wondering if min/max weight should be set by developer in code, not when init object
