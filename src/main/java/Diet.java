@@ -12,7 +12,7 @@ public abstract class Diet {
         this.purpose = purpose;
         this.allowedFood = allowedFood; // this.allowedFood.add(allowedFood) maybe?
         this.isVegan = isVegan;
-        hasOnlyVeganFood(allowedFood);
+        hasOnlyVeganFood();
     }
 
     public String writeDuration(){
@@ -24,11 +24,19 @@ public abstract class Diet {
         return "return allowed food as string";
     }
 
-    public static void checkAllowedFood(List<Food> allowedFood){}
+    public void checkAllowedFood(List<Food> allowedFood){}
 
-    public static LocalDate calculateDuration(int daysDuration){ return LocalDate.now(); }
+    public LocalDate calculateDuration(int daysDuration){ return LocalDate.now(); }
 
-    public static void hasOnlyVeganFood(List<Food> foods){}
+    public void hasOnlyVeganFood(){
+        for (Food food: allowedFood) {
+            if (!food.isVegan()) {
+                isVegan = false;
+                break;
+            }
+            else isVegan = true;
+        }
+    }
 
     public int getDaysDuration() {
         return daysDuration;

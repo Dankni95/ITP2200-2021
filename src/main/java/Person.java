@@ -6,7 +6,7 @@ public class Person {
     private Diet diet;
     private float weight;
 
-    public Person(Food favoriteFood, List<Food> allergies, Diet diet, float weight) {
+    public Person(Food favoriteFood, List<Food> allergies,Diet diet, float weight) {
         this.favoriteFood = favoriteFood;
         this.allergies = allergies;
         this.diet = diet;
