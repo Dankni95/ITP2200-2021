@@ -1,21 +1,16 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class DietTest {
-    Diet veganDiet;
-    Diet hypercaloricDiet;
-    List<Food> veganDietFood;
-    List<Food> notVeganDietFood;
+    Diet veganDiet, hypercaloricDiet;
+    List<Food> veganDietFood, notVeganDietFood;
     Food veganFood1, veganFood2, veganFood3, veganFood4, veganFood5;
     Food notVeganFood1, notVeganFood2, notVeganFood3, notVeganFood4, notVeganFood5;
 
     @BeforeEach
     public void setupAll() {
-
-
         //Vegan diet
         veganFood1 = new Food("Vegan-lasagne", 100, true, FoodType.RECIPE);
         veganFood2 = new Food("Falafel", 100, true, FoodType.CARB);
@@ -34,22 +29,15 @@ class DietTest {
 
         notVeganDietFood = List.of(notVeganFood1, notVeganFood2, notVeganFood3, notVeganFood4, notVeganFood5);
         hypercaloricDiet = new HypercaloricDiet(120, "weight-loss", notVeganDietFood, true, 50, 2000);
-
         }
-
     @Test
     public void hasOnlyVeganFood() {
-
         assertEquals(true, veganDiet.isVegan());
-
-
     }
     @Test
     public void shouldPassDueToDietNotVegan() {
-
         assertEquals(false, hypercaloricDiet.isVegan());
     }
-
     @Test
     public void shouldWriteOutStringCorrectly(){
         assertAll("Should write out duration correctly",
@@ -62,7 +50,6 @@ class DietTest {
                         hypercaloricDiet.calculateDuration().getMonths() + " months and " +
                         hypercaloricDiet.calculateDuration().getDays() +" days",   hypercaloricDiet.writeDuration())
         );
-
     }
     @Test
     public void shouldCalculateDurationCorrectly(){
@@ -72,7 +59,6 @@ class DietTest {
                 () -> assertEquals(Integer.valueOf(6),   veganDiet.calculateDuration().getDays())
         );
     }
-
     @Test
     public void shouldWriteDurationCorrectlyToString(){
         assertAll("Should be correct String when writing out duration",
@@ -82,9 +68,6 @@ class DietTest {
     }
     @Test
     public void shouldFail() {
-
         assertDoesNotThrow(() -> veganDiet = new VeganDiet(30, "weight-loss", veganDietFood, false, 50));
-
     }
-
 }
