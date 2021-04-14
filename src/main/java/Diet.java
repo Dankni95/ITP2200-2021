@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 public abstract class Diet {
@@ -12,23 +13,37 @@ public abstract class Diet {
         this.purpose = purpose;
         this.allowedFood = allowedFood; // this.allowedFood.add(allowedFood) maybe?
         this.isVegan = isVegan;
-        hasOnlyVeganFood(allowedFood);
+        hasOnlyVeganFood();
     }
 
     public String writeDuration(){
-        calculateDuration(daysDuration);
-        return "Duration in string";
+        return "This " + getClass().getName() + " lasts for " +
+                calculateDuration().getYears() + " years, " +
+                calculateDuration().getMonths() + " months and " +
+                calculateDuration().getDays() +" days";
     }
     public String writeAllowedFood(){
         checkAllowedFood(allowedFood);
         return "return allowed food as string";
     }
 
-    public static void checkAllowedFood(List<Food> allowedFood){}
+    public  void checkAllowedFood(List<Food> allowedFood){}
 
-    public static LocalDate calculateDuration(int daysDuration){ return LocalDate.now(); }
+    public Period calculateDuration(){
+        LocalDate parsedDuration = LocalDate.now().plusDays(daysDuration);
+        return LocalDate.now().until(parsedDuration);
+    }
 
-    public static void hasOnlyVeganFood(List<Food> foods){}
+
+    public void hasOnlyVeganFood(){
+        for (Food food: allowedFood) {
+            if (!food.isVegan()) {
+                isVegan = false;
+                break;
+            }
+            else isVegan = true;
+        }
+    }
 
     public int getDaysDuration() {
         return daysDuration;

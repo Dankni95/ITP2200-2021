@@ -7,10 +7,12 @@ public class LowCarbDiet extends Diet{
         super(daysDuration, purpose, allowedFood, isVegan);
         checkCarbCount(allowedFood);
         this.minWeightKg = minWeightKg;
-
     }
 
-    public static void checkCarbCount(List<Food> foods){}
+    public void checkCarbCount(List<Food> allowedFood){
+        if (allowedFood.stream().filter(food -> food.getType().equals(FoodType.CARB)).count() > 2)
+            throw new IllegalArgumentException("Cannot exeed more than 2 foods that are of carb types");
+    }
 
     public float getMinWeightKg() {
         return minWeightKg;
