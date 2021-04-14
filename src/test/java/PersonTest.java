@@ -69,7 +69,11 @@ class PersonTest {
     // Req 2a
     @Test // Vegan favoritefood and vegan-diet
     public void testIsVeganDietCompatible_1a(){
-        assertTrue(pV1.isVeganDietCompatible(veganDiet1, pV1.getFavoriteFood()));
+        Food food = new Food("Oat", 100, true, FoodType.CARB);
+        Diet veganDiet = new VeganDiet(30, "weight-loss", null, true, 50);
+
+        Person person = new Person(food, null, lowCarbDiet1, 50);
+        assertTrue(pV1.isVeganDietCompatible(veganDiet, person.getFavoriteFood()));
     }
 
     @Test // Vegan favoritefood and non-vegan-diet
@@ -87,57 +91,58 @@ class PersonTest {
     }
 
     // Req 2b
-    @Test // Person allergic to more than 50% of the dietFoods
-    void testIsNotTooAllergic_1b(){
-        food1 = new Food("Mais", 150, true, FoodType.PROTEIN);
-        food2 = new Food("Brokkoli", 150, true, FoodType.PROTEIN);
+    @Test // Person allergic to more than 50% of the allowed foods
+    void testIsNotTooAllergic_b1(){
+        Food food1 = new Food("Mais", 150, true, FoodType.PROTEIN);
+        Food food2 = new Food("Brokkoli", 150, true, FoodType.PROTEIN);
+        Food food3 = new Food("Gulrøtter", 150, true, FoodType.PROTEIN);
+        Food food4 = new Food("Agurk", 150, true, FoodType.PROTEIN);
+        Food food5 = new Food("Kjøttkaker", 150, false, FoodType.PROTEIN);
+        Food food6 = new Food("Ribbe", 150, false, FoodType.PROTEIN);
 
-        ArrayList<Food> allergies = new ArrayList<>();
-        allergies.add(food1);
-        allergies.add(food2);
-        allergies.add(food3);
+        ArrayList<Food> allergies = new ArrayList<>(List.of(food1, food2, food3));
+        ArrayList<Food> allowedFoods = new ArrayList<>(List.of(food1, food2, food4));
 
-        ArrayList<Food> dietFoods = new ArrayList<>();
-        dietFoods.add(food1);
-        dietFoods.add(food2);
-        allergies.add(food4);
-        diet1 = new LowCarbDiet(11, "hh", dietFoods, true, 75);
-        person1 = new Person(food1, allergies, diet1, 75);
+        Diet diet = new LowCarbDiet(11, "hh", allowedFoods, true, 75);
+        Person person1 = new Person(food1, allergies, diet, 75);
 
-        assertFalse(person1.isNotTooAllergic(diet1, person1.getAllergies()));
+        assertFalse(person1.isNotTooAllergic(diet, person1.getAllergies()));
     }
 
-    @Test // Person allergic to 50% of the dietFoods
+    @Test // Person allergic to 50% of the allowed foods
     void testIsNotTooAllergic_b2(){
-        ArrayList<Food> allergies = new ArrayList<>();
-        allergies.add(food1);
-        allergies.add(food2);
+        Food food1 = new Food("Mais", 150, true, FoodType.PROTEIN);
+        Food food2 = new Food("Brokkoli", 150, true, FoodType.PROTEIN);
+        Food food3 = new Food("Gulrøtter", 150, true, FoodType.PROTEIN);
+        Food food4 = new Food("Agurk", 150, true, FoodType.PROTEIN);
+        Food food5 = new Food("Kjøttkaker", 150, false, FoodType.PROTEIN);
+        Food food6 = new Food("Ribbe", 150, false, FoodType.PROTEIN);
 
-        ArrayList<Food> dietFoods = new ArrayList<>();
-        dietFoods.add(food1);
-        dietFoods.add(food4);
-        diet1 = new LowCarbDiet(11, "hh", dietFoods, true, 75);
-        person1 = new Person(food1, allergies, diet1, 75);
+        ArrayList<Food> allergies = new ArrayList<>(List.of(food1, food2));
+        ArrayList<Food> allowedFoods = new ArrayList<>(List.of(food1, food3));
 
-        assertFalse(person1.isNotTooAllergic(diet1, person1.getAllergies()));
+        Diet diet = new LowCarbDiet(11, "hh", allowedFoods, true, 75);
+        Person person1 = new Person(food1, allergies, diet, 75);
+
+        assertFalse(person1.isNotTooAllergic(diet, person1.getAllergies()));
     }
 
     @Test // Person allergic to less than 50% of the dietFoods
     void testIsNotTooAllergic_b3(){
-        ArrayList<Food> allergies = new ArrayList<>();
-        allergies.add(food1);
-        allergies.add(food2);
-        allergies.add(food3);
+        Food food1 = new Food("Mais", 150, true, FoodType.PROTEIN);
+        Food food2 = new Food("Brokkoli", 150, true, FoodType.PROTEIN);
+        Food food3 = new Food("Gulrøtter", 150, true, FoodType.PROTEIN);
+        Food food4 = new Food("Agurk", 150, true, FoodType.PROTEIN);
+        Food food5 = new Food("Kjøttkaker", 150, false, FoodType.PROTEIN);
+        Food food6 = new Food("Ribbe", 150, false, FoodType.PROTEIN);
 
-        ArrayList<Food> dietFoods = new ArrayList<>();
-        dietFoods.add(food1);
-        dietFoods.add(food4);
-        dietFoods.add(food5);
+        ArrayList<Food> allergies = new ArrayList<>(List.of(food1, food2, food3));
+        ArrayList<Food> allowedFoods = new ArrayList<>(List.of(food1, food4, food5));
 
-        diet1 = new LowCarbDiet(11, "hh", dietFoods, true, 75);
-        person1 = new Person(food1, allergies, diet1, 75);
+        Diet diet = new LowCarbDiet(11, "hh", allowedFoods, true, 75);
+        Person person1 = new Person(food1, allergies, diet, 75);
 
-        assertTrue(person1.isNotTooAllergic(diet1, person1.getAllergies()));
+        assertTrue(person1.isNotTooAllergic(diet, person1.getAllergies()));
     }
 
 
@@ -170,15 +175,15 @@ class PersonTest {
     // Req 2b
     @Test // Person weigh less than maxWeight
     void testIsMaxWeightCompatible_1(){
-        ArrayList<Food> allergies = new ArrayList<>();
-        allergies.add(food1);
-        allergies.add(food2);
-        allergies.add(food3);
+        List<Food> allergies = new ArrayList<>();
+        allergies = List.of(food1, food2, food3);
 
-        ArrayList<Food> dietFoods = new ArrayList<>();
-        dietFoods.add(food8);
-        dietFoods.add(food4);
-        dietFoods.add(food5);
+        List<Food> dietFoods = new ArrayList<>();
+        allergies = List.of(food8, food4, food5);
+
+
+        veganDietFood = List.of(fV1, fV2, fV3);
+        dietFoods = List.of(fNV1, fNV2);
 
         diet1 = new LowCarbDiet(11, "hh", dietFoods, true, 75);
         person1 = new Person(food1, allergies, diet1, 60);

@@ -53,8 +53,10 @@ public class Person {
     }
 
     public boolean isNotTooAllergic(Diet diet, List<Food> allergies ){
-        double numberOfAllergicMatch = 0;
+        if(allergies == null)
+            return true;
 
+        double numberOfAllergicMatch = 0;
         double numberOfAllowedFood = diet.getAllowedFood().size();
         for (Food allergyFood : allergies) {
             for (Food dietFood: diet.getAllowedFood()) {
