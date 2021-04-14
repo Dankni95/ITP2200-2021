@@ -1,8 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class FlexitarianDietTest {
@@ -29,7 +27,6 @@ class FlexitarianDietTest {
         assertThrows(RuntimeException.class, () -> {
             flexitarianDiet = new FlexitarianDiet(30, "Less-Meat", flexitarianDietFood, false, 200, flexitarianFood4);
         });
-
     }
     @Test
     public void shouldPass() {
