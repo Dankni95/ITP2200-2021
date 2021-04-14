@@ -6,10 +6,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class VeganDietTest {
-    private Person veganPerson;
-    Diet veganDiet;
     Diet failedVeganDiet;
-    List<Food> veganDietFood;
     List<Food> failedVeganDietFood;
     Food failedVeganFood1, failedVeganFood2, failedVeganFood3, failedVeganFood4, failedVeganFood5;
 
@@ -23,7 +20,6 @@ class VeganDietTest {
         failedVeganFood5 = new Food("Chocolate-Milk", 50, true, FoodType.PROTEIN);
 
         failedVeganDietFood = List.of(failedVeganFood1, failedVeganFood2, failedVeganFood3, failedVeganFood4, failedVeganFood5);
-        //failedVeganDiet = new VeganDiet(30, "weight-loss", failedVeganDietFood, true, 50);
     }
         @Test
         public void shouldThrowErrorNotVeganFoodInDiet(){
@@ -33,15 +29,6 @@ class VeganDietTest {
             });
 
         }
-    /*
-    @Test
-    public void shouldFail() {
-
-        assertDoesNotThrow(() -> veganDiet = new VeganDiet(30, "weight-loss", veganDietFood, false, 50));
-
-
-
-    }*/
 
 
     }

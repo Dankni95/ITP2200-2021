@@ -8,10 +8,16 @@ public class FlexitarianDiet extends Diet {
         super(daysDuration, purpose, allowedFood, isVegan);
         this.maxMeatGrams = maxMeatGrams;
         this.preferredMeat = preferredMeat;
-        checkPreferredMeat(preferredMeat);
+        checkPreferredMeat();
     }
 
-    public static void checkPreferredMeat(Food preferredMeat){}
+    public void checkPreferredMeat(){
+
+            if (preferredMeat.isVegan() || !preferredMeat.getType().equals(FoodType.PROTEIN)) {
+                throw new IllegalArgumentException("The preferred meat in a FlexitarianDiet MUST be non-vegan food of protein type.");
+
+        }
+    }
 
     public float getMaxMeatGrams() {
         return maxMeatGrams;
