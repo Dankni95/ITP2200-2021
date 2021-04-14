@@ -1,14 +1,11 @@
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class DietTest {
-    private Person veganPerson;
     Diet veganDiet;
     Diet hypercaloricDiet;
     List<Food> veganDietFood;
@@ -38,20 +35,6 @@ class DietTest {
 
         notVeganDietFood = List.of(notVeganFood1, notVeganFood2, notVeganFood3, notVeganFood4, notVeganFood5);
         hypercaloricDiet = new HypercaloricDiet(30, "weight-loss", notVeganDietFood, true, 50, 2000);
-
-        /*
-        Food favoriteFood = new Food("Cake", 400, true, FoodType.RECIPE);
-        allergy1 = new Food("Cake", 400, true, FoodType.CARB);
-        allergy2 = new Food("Nuts", 600, true, FoodType.FAT);
-        allergy3 = new Food("Steak", 300, false, FoodType.PROTEIN);
-        allergy4 = new Food("Kale", 100, true, FoodType.CARB);
-
-        allergies = List.of(allergy1, allergy2, allergy3, allergy4);
-
-        veganPerson = new Person(favoriteFood, allergies, veganDiet, 70);
-
-         */
-
         }
 
     @Test
@@ -59,14 +42,20 @@ class DietTest {
 
         assertEquals(true, veganDiet.isVegan());
 
-
     }
     @Test
     public void shouldPassDueToDietNotVegan() {
 
         assertEquals(false, hypercaloricDiet.isVegan());
-//FAILS EVEN THOUGH IS.VEGAN FOOD IS SET TO FALSE. FAULTY CODE.
+
+
     }
 
+    @Test
+    public void shouldFail() {
+
+        assertDoesNotThrow(() -> veganDiet = new VeganDiet(30, "weight-loss", veganDietFood, false, 50));
+
+    }
 
 }
