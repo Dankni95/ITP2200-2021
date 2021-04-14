@@ -5,7 +5,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DietTest {
-    private Person veganPerson;
     Diet veganDiet;
     Diet hypercaloricDiet;
     List<Food> veganDietFood;
@@ -80,6 +79,12 @@ class DietTest {
                 () -> assertEquals("This VeganDiet lasts for 0 years, 7 months and 6 days",   veganDiet.writeDuration()),
                 () -> assertEquals("This HypercaloricDiet lasts for 0 years, 3 months and 29 days",  hypercaloricDiet.writeDuration())
         );
+    }
+    @Test
+    public void shouldFail() {
+
+        assertDoesNotThrow(() -> veganDiet = new VeganDiet(30, "weight-loss", veganDietFood, false, 50));
+
     }
 
 }
