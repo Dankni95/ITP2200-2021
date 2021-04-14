@@ -1,3 +1,4 @@
+import javax.swing.event.HyperlinkEvent;
 import java.util.List;
 
 public class Person {
@@ -41,8 +42,10 @@ public class Person {
     public Diet getDiet() { return diet; }
 
     public void setDiet(Diet diet) {
+        checkCompatibility();
         this.diet = diet;
     }
+
 
     public float getWeightKg() {
         return weight;
