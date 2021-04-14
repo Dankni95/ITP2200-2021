@@ -6,39 +6,57 @@ public class Person {
     private Diet diet;
     private float weight;
 
+    /*
+    Forslag:
+        - to constructors:
+            1. setter alle fire attributter. Diet bruker setDiet-metode
+            2. setter kun tre attributter, ekskluderer Diet
+        - setDiet
+            skal ha en check-metode
+
+
+
+     */
+
     public Person(Food favoriteFood, List<Food> allergies, Diet diet, float weight) {
         this.favoriteFood = favoriteFood;
         this.allergies = allergies;
         this.diet = diet;
         this.weight = weight;
-        compatibilityValidator(diet);
 
+        compatibilityValidator(favoriteFood, allergies, diet, weight);
     }
 
-    public void compatibilityValidator(Diet diet){
-        if(!isNotTooAllergic(diet))
+    public void compatibilityValidator(Food favoriteFood, List<Food> allergies, Diet diet, float weight){
+        if (!isVeganDietCompatible(diet, favoriteFood)){
             throw new IllegalArgumentException("Cannot follow the VeganDiet, because favorite foods is non-vegan");
-        if (!isVeganDietCompatible(diet))
-            throw new IllegalArgumentException("Cannot follow the diet, because allergic to 50% or more of the food " +
-                    "allowed by the diet");
-        if (!isMaxWeightCompatible(diet))
-            throw new IllegalArgumentException("Cannot follow the diet(VeganDiet or LowCarbDiet), because the persons" +
-                    " weight is too low");
-        if (!isMinWeightCompatible(diet))
-            throw new IllegalArgumentException("Cannot follow the HypercaloricDiet, because the persons weight is too" +
-                    " high");
+        }
+
+        if(!isNotTooAllergic(diet, allergies)){
+            throw new IllegalArgumentException("Cannot follow the diet, because allergic to 50% or more of the food allowed by the diet");
+        }
+
+        if (!isMaxWeightCompatible(diet)){
+            throw new IllegalArgumentException("Cannot follow the diet(VeganDiet or LowCarbDiet), because the persons weight is too low");
+        }
+
+        if (!isMinWeightCompatible(diet)){
+            throw new IllegalArgumentException("Cannot follow the HypercaloricDiet, because the persons weight is too high");
+        }
+
     }
 
-    public boolean isVeganDietCompatible(Diet d){
+    public boolean isVeganDietCompatible(Diet d, Food favoriteFood){
         if (!favoriteFood.isVegan() && d instanceof VeganDiet)
             return false;
         return true;
     }
 
-    public boolean isNotTooAllergic(Diet diet){
+    public boolean isNotTooAllergic(Diet diet, List<Food> allergies ){
         double numberOfAllergicMatch = 0;
+
         double numberOfAllowedFood = diet.getAllowedFood().size();
-        for (Food allergyFood : this.allergies) {
+        for (Food allergyFood : allergies) {
             for (Food dietFood: diet.getAllowedFood()) {
                 if(allergyFood.getName().equals(dietFood.getName()))
                     numberOfAllergicMatch++;
@@ -116,4 +134,3 @@ public class Person {
 
 
 }
-

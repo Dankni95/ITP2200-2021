@@ -24,9 +24,9 @@ class PersonTest {
     Diet lowCarbDiet1;
     Diet hypercaloricDate1;
 
-    List<Food> veganDietFood;
-    List<Food> dietFoods;
-    List<Food> allergies;
+    List<Food> veganDietFood = new ArrayList<>();
+    List<Food> dietFoods = new ArrayList<>();
+    List<Food> allergies = new ArrayList<>();
 
 
     @BeforeEach
@@ -54,9 +54,9 @@ class PersonTest {
         hypercaloricDate1 = new HypercaloricDiet(60, "Weight-gain", dietFoods, false, 50, 4000);
 
         // Person:
-        pV1 = new Person(fV1, null, lowCarbDiet1, 50);
+        pV1 = new Person(fV1, allergies, lowCarbDiet1, 50);
         pNV1 = new Person(fNV1, allergies, lowCarbDiet1, 75);
-        pNV2 = new Person(fV1, null, hypercaloricDate1, 40);
+        pNV2 = new Person(fV1, allergies, hypercaloricDate1, 40);
 
         // FoodArray:
         veganDietFood = new ArrayList<>();
@@ -69,26 +69,29 @@ class PersonTest {
     // Req 2a
     @Test // Vegan favoritefood and vegan-diet
     public void testIsVeganDietCompatible_1a(){
-        assertTrue(pV1.isVeganDietCompatible(veganDiet1));
+        assertTrue(pV1.isVeganDietCompatible(veganDiet1, pV1.getFavoriteFood()));
     }
 
     @Test // Vegan favoritefood and non-vegan-diet
     public void testIsVeganDietCompatible_1b(){
-        assertTrue(pV1.isVeganDietCompatible(lowCarbDiet1));
+        assertTrue(pV1.isVeganDietCompatible(lowCarbDiet1, pV1.getFavoriteFood()));
     }
 
     @Test // Non-vegan favoritefood and vegan-diet
     public void testIsVeganDietCompatible_1c(){
-        assertFalse(pNV1.isVeganDietCompatible(veganDiet1));
+        assertFalse(pNV1.isVeganDietCompatible(veganDiet1, pNV1.getFavoriteFood()));
     }
     @Test // Non-vegan favoritefood and non-vegan-diet
     public void testIsVeganDietCompatible_1d(){
-        assertTrue(pNV1.isVeganDietCompatible(lowCarbDiet1));
+        assertTrue(pNV1.isVeganDietCompatible(lowCarbDiet1, pNV1.getFavoriteFood()));
     }
 
     // Req 2b
     @Test // Person allergic to more than 50% of the dietFoods
     void testIsNotTooAllergic_1b(){
+        food1 = new Food("Mais", 150, true, FoodType.PROTEIN);
+        food2 = new Food("Brokkoli", 150, true, FoodType.PROTEIN);
+
         ArrayList<Food> allergies = new ArrayList<>();
         allergies.add(food1);
         allergies.add(food2);
@@ -98,10 +101,10 @@ class PersonTest {
         dietFoods.add(food1);
         dietFoods.add(food2);
         allergies.add(food4);
-        diet1 = new VeganDiet(11, "hh", dietFoods, true, 100);
+        diet1 = new LowCarbDiet(11, "hh", dietFoods, true, 75);
         person1 = new Person(food1, allergies, diet1, 75);
 
-        assertFalse(person1.isNotTooAllergic(diet1));
+        assertFalse(person1.isNotTooAllergic(diet1, person1.getAllergies()));
     }
 
     @Test // Person allergic to 50% of the dietFoods
@@ -113,10 +116,10 @@ class PersonTest {
         ArrayList<Food> dietFoods = new ArrayList<>();
         dietFoods.add(food1);
         dietFoods.add(food4);
-        diet1 = new VeganDiet(11, "hh", dietFoods, true, 100);
+        diet1 = new LowCarbDiet(11, "hh", dietFoods, true, 75);
         person1 = new Person(food1, allergies, diet1, 75);
 
-        assertFalse(person1.isNotTooAllergic(diet1));
+        assertFalse(person1.isNotTooAllergic(diet1, person1.getAllergies()));
     }
 
     @Test // Person allergic to less than 50% of the dietFoods
@@ -131,10 +134,10 @@ class PersonTest {
         dietFoods.add(food4);
         dietFoods.add(food5);
 
-        diet1 = new VeganDiet(11, "hh", dietFoods, true, 100);
+        diet1 = new LowCarbDiet(11, "hh", dietFoods, true, 75);
         person1 = new Person(food1, allergies, diet1, 75);
 
-        assertTrue(person1.isNotTooAllergic(diet1));
+        assertTrue(person1.isNotTooAllergic(diet1, person1.getAllergies()));
     }
 
 
@@ -167,26 +170,56 @@ class PersonTest {
     // Req 2b
     @Test // Person weigh less than maxWeight
     void testIsMaxWeightCompatible_1(){
-        person1 = new Person(food1, allergies, diet1, 79);
-        diet1 = new HypercaloricDiet(11, "hh", dietFoods, true, 80, 1000);
+        ArrayList<Food> allergies = new ArrayList<>();
+        allergies.add(food1);
+        allergies.add(food2);
+        allergies.add(food3);
+
+        ArrayList<Food> dietFoods = new ArrayList<>();
+        dietFoods.add(food8);
+        dietFoods.add(food4);
+        dietFoods.add(food5);
+
+        diet1 = new LowCarbDiet(11, "hh", dietFoods, true, 75);
+        person1 = new Person(food1, allergies, diet1, 60);
 
         assertTrue(person1.isMaxWeightCompatible(diet1));
     }
 
     @Test // Person weigh same as maxWeight
     void testIsMaxWeightCompatible_2(){
-        person1 = new Person(food1, allergies, diet1, 80);
-        diet1 = new HypercaloricDiet(11, "hh", dietFoods, true, 80, 1000);
+        ArrayList<Food> allergies = new ArrayList<>();
+        allergies.add(food1);
+        allergies.add(food2);
+        allergies.add(food3);
+
+        ArrayList<Food> dietFoods = new ArrayList<>();
+        dietFoods.add(food8);
+        dietFoods.add(food4);
+        dietFoods.add(food5);
+
+        diet1 = new LowCarbDiet(11, "hh", dietFoods, true, 75);
+        person1 = new Person(food1, allergies, diet1, 75);
 
         assertTrue(person1.isMaxWeightCompatible(diet1));
     }
 
     @Test // Person weigh more than maxWeight
     void testIsMaxWeightCompatible_3(){
-        person1 = new Person(food1, allergies, diet1, 81);
-        diet1 = new HypercaloricDiet(11, "hh", dietFoods, true, 80, 1000);
+        ArrayList<Food> allergies = new ArrayList<>();
+        allergies.add(food1);
+        allergies.add(food2);
+        allergies.add(food3);
 
-        assertFalse(person1.isMaxWeightCompatible(diet1));
+        ArrayList<Food> dietFoods = new ArrayList<>();
+        dietFoods.add(food8);
+        dietFoods.add(food4);
+        dietFoods.add(food5);
+
+        diet1 = new LowCarbDiet(11, "hh", dietFoods, true, 75);
+        person1 = new Person(food1, allergies, diet1, 80);
+
+        assertTrue(person1.isMaxWeightCompatible(diet1));
     }
 
     @Test // Validate VeganDiet when favoritt Foo
