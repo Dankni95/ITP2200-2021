@@ -14,36 +14,30 @@ public class Person {
         - setDiet
             skal ha en check-metode
 
-
-
      */
 
     public Person(Food favoriteFood, List<Food> allergies, Diet diet, float weight) {
         this.favoriteFood = favoriteFood;
         this.allergies = allergies;
-        this.diet = diet;
         this.weight = weight;
-
         compatibilityValidator(favoriteFood, allergies, diet, weight);
+        this.diet = diet;
     }
 
     public void compatibilityValidator(Food favoriteFood, List<Food> allergies, Diet diet, float weight){
+
         if (!isVeganDietCompatible(diet, favoriteFood)){
             throw new IllegalArgumentException("Cannot follow the VeganDiet, because favorite foods is non-vegan");
         }
-
         if(!isNotTooAllergic(diet, allergies)){
             throw new IllegalArgumentException("Cannot follow the diet, because allergic to 50% or more of the food allowed by the diet");
         }
-
-        if (!isMaxWeightCompatible(diet)){
+        if (!isMinWeightCompatible(diet)){
             throw new IllegalArgumentException("Cannot follow the diet(VeganDiet or LowCarbDiet), because the persons weight is too low");
         }
-
-        if (!isMinWeightCompatible(diet)){
+        if (!isMaxWeightCompatible(diet)){
             throw new IllegalArgumentException("Cannot follow the HypercaloricDiet, because the persons weight is too high");
         }
-
     }
 
     public boolean isVeganDietCompatible(Diet d, Food favoriteFood){
@@ -54,8 +48,8 @@ public class Person {
 
     public boolean isNotTooAllergic(Diet diet, List<Food> allergies ){
         double numberOfAllergicMatch = 0;
-
         double numberOfAllowedFood = diet.getAllowedFood().size();
+
         for (Food allergyFood : allergies) {
             for (Food dietFood: diet.getAllowedFood()) {
                 if(allergyFood.getName().equals(dietFood.getName()))
