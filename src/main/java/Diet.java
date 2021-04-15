@@ -1,6 +1,9 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class Diet {
     private int daysDuration;
@@ -14,6 +17,7 @@ public abstract class Diet {
         this.allowedFood = allowedFood; // this.allowedFood.add(allowedFood) maybe?
         this.isVegan = isVegan;
         hasOnlyVeganFood();
+
     }
 
     public String writeDuration(){
@@ -22,12 +26,22 @@ public abstract class Diet {
                 calculateDuration().getMonths() + " months and " +
                 calculateDuration().getDays() +" days";
     }
+
     public String writeAllowedFood(){
-        checkAllowedFood(allowedFood);
-        return "return allowed food as string";
+
+         return "The following food is allowed in this " + getClass().getName() + ": " + formatAllowedFood();
     }
 
-    public  void checkAllowedFood(List<Food> allowedFood){}
+    public String formatAllowedFood(){
+        StringBuffer string = new StringBuffer("");
+
+        allowedFood.forEach((food) -> {
+            string.append(food.getName().substring(0,1).toUpperCase() + food.getName().substring(1).toLowerCase()).append(", ");
+        });
+
+        return string.substring(0,string.length() - 2);
+    }
+
 
     public Period calculateDuration(){
         LocalDate parsedDuration = LocalDate.now().plusDays(daysDuration);
