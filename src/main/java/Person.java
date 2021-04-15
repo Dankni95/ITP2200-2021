@@ -6,16 +6,6 @@ public class Person {
     private Diet diet;
     private float weight;
 
-    /*
-    Forslag:
-        - to constructors:
-            1. setter alle fire attributter. Diet bruker setDiet-metode
-            2. setter kun tre attributter, ekskluderer Diet
-        - setDiet
-            skal ha en check-metode
-
-     */
-
     public Person(Food favoriteFood, List<Food> allergies, Diet diet, float weight) {
         this.favoriteFood = favoriteFood;
         this.allergies = allergies;
@@ -92,7 +82,6 @@ public class Person {
         }
         return true;
     }
-
 
 
 

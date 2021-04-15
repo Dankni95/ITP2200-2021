@@ -18,23 +18,17 @@ class FlexitarianDietTest {
         flexitarianFood5 = new Food("Soy-Milk", 50, true, FoodType.PROTEIN);
 
         flexitarianDietFood = List.of(flexitarianFood1, flexitarianFood2, flexitarianFood3, flexitarianFood4, flexitarianFood5);
-
     }
-
     @Test
     public void shouldThrowErrorNotVeganFoodInDiet(){
-
         assertThrows(RuntimeException.class, () -> {
             flexitarianDiet = new FlexitarianDiet(30, "Less-Meat", flexitarianDietFood, false, 200, flexitarianFood4);
         });
     }
     @Test
     public void shouldPass() {
-
         assertDoesNotThrow(() -> flexitarianDiet = new FlexitarianDiet(30, "Less-Meat", flexitarianDietFood, false, 200, flexitarianFood3));
-
     }
-
 }
 
 

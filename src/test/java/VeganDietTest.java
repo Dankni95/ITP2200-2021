@@ -1,15 +1,12 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class VeganDietTest {
     Diet failedVeganDiet;
     List<Food> failedVeganDietFood;
     Food failedVeganFood1, failedVeganFood2, failedVeganFood3, failedVeganFood4, failedVeganFood5;
-
 
     @BeforeEach
     public void setupAll() {
@@ -27,9 +24,6 @@ class VeganDietTest {
             assertThrows(RuntimeException.class, () -> {
                 failedVeganDiet = new VeganDiet(30, "weight-loss", failedVeganDietFood, true, 50);
             });
-
         }
-
-
     }
 
