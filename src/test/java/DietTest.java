@@ -24,7 +24,7 @@ class DietTest {
         veganFood2 = new Food("Falafel", 100, true, FoodType.CARB);
         veganFood3 = new Food("Chickpea", 100, true, FoodType.PROTEIN);
         veganFood4 = new Food("Meat-mince", 100, true, FoodType.PROTEIN);
-        veganFood5 = new Food("Soy-Milk", 50, true, FoodType.PROTEIN);
+        veganFood5 = new Food("Soy-milk", 50, true, FoodType.PROTEIN);
 
         veganDietFood = List.of(veganFood1, veganFood2, veganFood3, veganFood4, veganFood5);
         veganDiet = new VeganDiet(220, "weight-loss", veganDietFood, false, 50);

@@ -1,5 +1,3 @@
-import org.w3c.dom.ls.LSOutput;
-
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -17,7 +15,6 @@ public abstract class Diet {
         this.allowedFood = allowedFood; // this.allowedFood.add(allowedFood) maybe?
         this.isVegan = isVegan;
         hasOnlyVeganFood();
-
     }
 
     public String writeDuration(){
@@ -33,13 +30,12 @@ public abstract class Diet {
     }
 
     public String formatAllowedFood(){
-        StringBuffer string = new StringBuffer("");
 
-        allowedFood.forEach((food) -> {
-            string.append(food.getName().substring(0,1).toUpperCase() + food.getName().substring(1).toLowerCase()).append(", ");
-        });
+        List<String> allowedFoodNames = allowedFood.stream().map(Food::getName).collect(Collectors.toList());
 
-        return string.substring(0,string.length() - 2);
+       return allowedFoodNames.stream()
+                .map(foodName -> Character.toUpperCase(foodName.charAt(0)) + foodName.substring(1))
+                .collect(Collectors.toList()).toString().substring(1, allowedFoodNames.toString().length() - 1);
     }
 
 
