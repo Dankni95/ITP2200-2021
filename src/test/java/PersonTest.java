@@ -377,6 +377,7 @@ class PersonTest {
         Diet veganDiet = new LowCarbDiet(30, "Healthy-lifestyle", allowedFoods, false, 80);
         Person person = new Person(food, allergies, 80);
 
+
         System.out.println(person.getListOfNonAllergicAllowedFood(allowedFoods).size());
         for (Food foodtest : person.getListOfNonAllergicAllowedFood(allowedFoods)) {
             System.out.println(foodtest.getName());
