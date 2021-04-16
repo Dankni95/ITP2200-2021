@@ -61,10 +61,9 @@ public class Person {
 
     public List<Food> getListOfNonAllergicAllowedFood(List<Food> foodArray){
 
-        foodArray.removeIf(allowed -> {
-           return allergies.stream().anyMatch(allergy -> (allowed.getName().equals(allergy.getName())));
-        });
-      return foodArray;
+        foodArray.removeIf(allowed -> allergies.stream()
+                .anyMatch(allergy -> (allowed.getName().equals(allergy.getName()))));
+        return foodArray;
     }
 
 
