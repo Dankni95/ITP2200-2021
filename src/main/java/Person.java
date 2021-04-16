@@ -60,16 +60,11 @@ public class Person {
     }
 
     public List<Food> getListOfNonAllergicAllowedFood(List<Food> foodArray){
-        ArrayList <Food> nonAllergicAllowedFoods = new ArrayList<>();
-        List <Food> allowedFoodNotchanged = foodArray;
 
-        for (Food allowedFood : foodArray){
-            for (Food allergyFood : this.allergies) {
-                if (allowedFood.getName().equals(allergyFood.getName()))
-                    allowedFoodNotchanged.remove(allowedFood);
-            }
-        }
-        return allowedFoodNotchanged;
+        foodArray.removeIf(allowed -> {
+           return allergies.stream().anyMatch(allergy -> (allowed.getName().equals(allergy.getName())));
+        });
+      return foodArray;
     }
 
 

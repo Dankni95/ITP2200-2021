@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static jdk.internal.org.jline.utils.AttributedStringBuilder.append;
 import static org.junit.jupiter.api.Assertions.*;
 
 
