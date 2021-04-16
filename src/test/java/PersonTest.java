@@ -7,7 +7,52 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 class PersonTest {
+    //  constructors with all attributes
+    @Test //
+    public void testPersonConstructor_a(){
+        List<Food> allergies = new ArrayList<>();
+        List<Food> allowedFood = new ArrayList<>();
+        Food veganFood = new Food("Raw-cake", 100, true, FoodType.FAT);
+        allowedFood.add(veganFood);
+        Diet veganDiet = new VeganDiet(50, "Weight-loss", allowedFood, true, 50);
+
+        Person person = new Person(veganFood, allergies, veganDiet, 60);
+
+        assertEquals(allergies, person.getAllergies());
+        assertEquals(veganDiet, person.getDiet());
+        assertEquals(veganFood, person.getFavoriteFood());
+        assertEquals(60, person.getWeightKg());
+    }
+
+    @Test // constructors without diet-attribute
+    public void testPersonConstructor_b(){
+        List<Food> allergies = new ArrayList<>();
+        Food veganFood = new Food("Raw-cake", 100, true, FoodType.FAT);
+
+        Person person = new Person(veganFood, allergies, 60);
+
+        assertEquals(allergies, person.getAllergies());
+        assertNull(person.getDiet());
+        assertEquals(veganFood, person.getFavoriteFood());
+        assertEquals(60, person.getWeightKg());
+    }
+
+    // Setter for Diet
+    @Test //
+    public void testSetDiet(){
+        List<Food> allergies = new ArrayList<>();
+        List<Food> allowedFood = new ArrayList<>();
+        Food veganFood = new Food("Raw-cake", 100, true, FoodType.FAT);
+        allowedFood.add(veganFood);
+        Diet veganDiet = new VeganDiet(50, "Weight-loss", allowedFood, true, 50);
+        Person person = new Person(veganFood, allergies, 60);
+
+        person.setDiet(veganDiet);
+
+        assertEquals(veganDiet, person.getDiet());
+    }
 
     // Req 2a
     @Test // Vegan favoritefood and vegan-diet
@@ -19,7 +64,7 @@ class PersonTest {
         Diet veganDiet = new VeganDiet(50, "Weight-loss", allowedFood, true, 50);
         Person person = new Person(veganFood, allergies, veganDiet, 60);
 
-        assertTrue(person.isVeganDietCompatible(veganDiet, person.getFavoriteFood()));
+        assertTrue(person.isVeganDietCompatible(veganDiet));
     }
 
     @Test // Vegan favoritefood and non-vegan-diet
@@ -32,7 +77,7 @@ class PersonTest {
         Diet lowCarbDiet = new LowCarbDiet(50, "Weight-loss", allowedFood, false, 50);
         Person person = new Person(veganFood, allergies, lowCarbDiet, 50);
 
-        assertTrue(person.isVeganDietCompatible(lowCarbDiet, person.getFavoriteFood()));
+        assertTrue(person.isVeganDietCompatible(lowCarbDiet));
     }
 
     @Test // Non-vegan favoritefood and vegan-diet
@@ -45,7 +90,7 @@ class PersonTest {
         Diet veganDiet = new LowCarbDiet(50, "Weight-loss", allowedFood, false, 50);
         Person person = new Person(nonVeganFood, allergies, veganDiet, 50);
 
-        assertTrue(person.isVeganDietCompatible(veganDiet, person.getFavoriteFood()));
+        assertTrue(person.isVeganDietCompatible(veganDiet));
     }
     @Test // Non-vegan favoritefood and non-vegan-diet
     public void testIsVeganDietCompatible_1d(){
@@ -56,7 +101,7 @@ class PersonTest {
         Diet lowCarbDiet = new LowCarbDiet(50, "Weight-loss", allowedFood, false, 50);
         Person person = new Person(nonVeganFood, allergies, lowCarbDiet, 50);
 
-        assertTrue(person.isVeganDietCompatible(lowCarbDiet, person.getFavoriteFood()));
+        assertTrue(person.isVeganDietCompatible(lowCarbDiet));
     }
 
     // Req 2b
@@ -66,8 +111,8 @@ class PersonTest {
         Food food2 = new Food("Brokkoli", 150, true, FoodType.PROTEIN);
         Food food3 = new Food("Gulrøtter", 150, true, FoodType.PROTEIN);
         Food food4 = new Food("Agurk", 150, true, FoodType.PROTEIN);
-        Food food5 = new Food("Kjøttkaker", 150, false, FoodType.PROTEIN);
-        Food food6 = new Food("Ribbe", 150, false, FoodType.PROTEIN);
+        Food food5 = new Food("Tomater", 150, true, FoodType.PROTEIN);
+        Food food6 = new Food("Suppe", 150, true, FoodType.PROTEIN);
 
         ArrayList<Food> allergies = new ArrayList<>(List.of(food1, food2, food3));
         ArrayList<Food> allowedFoods = new ArrayList<>(List.of(food1, food2, food4));
@@ -78,7 +123,7 @@ class PersonTest {
         Person person = new Person(food1, allergies, veganDiet, 80);
 
 
-        assertFalse(person.isNotTooAllergic(lowcarbDiet, person.getAllergies()));
+        assertFalse(person.isNotTooAllergic(lowcarbDiet));
 
     }
 
@@ -88,8 +133,8 @@ class PersonTest {
         Food food2 = new Food("Brokkoli", 150, true, FoodType.PROTEIN);
         Food food3 = new Food("Gulrøtter", 150, true, FoodType.PROTEIN);
         Food food4 = new Food("Agurk", 150, true, FoodType.PROTEIN);
-        Food food5 = new Food("Kjøttkaker", 150, false, FoodType.PROTEIN);
-        Food food6 = new Food("Ribbe", 150, false, FoodType.PROTEIN);
+        Food food5 = new Food("Tomater", 150, true, FoodType.PROTEIN);
+        Food food6 = new Food("Suppe", 150, true, FoodType.PROTEIN);
 
         ArrayList<Food> allergies = new ArrayList<>(List.of(food1, food2));
         ArrayList<Food> allowedFoods = new ArrayList<>(List.of(food1, food3));
@@ -99,7 +144,7 @@ class PersonTest {
         Diet veganDiet = new VeganDiet(30, "Healthy-lifestyle", listOfVeganFood, true, 80);
         Person person = new Person(food1, allergies, veganDiet, 80);
 
-        assertFalse(person.isNotTooAllergic(lowcarbDiet, person.getAllergies()));
+        assertFalse(person.isNotTooAllergic(lowcarbDiet));
     }
 
     @Test // Person allergic to less than 50% of the dietFoods
@@ -115,9 +160,10 @@ class PersonTest {
         ArrayList<Food> allowedFoods = new ArrayList<>(List.of(food1, food4, food5));
 
         Diet diet = new LowCarbDiet(11, "hh", allowedFoods, true, 75);
+
         Person person1 = new Person(food1, allergies, diet, 75);
 
-        assertTrue(person1.isNotTooAllergic(diet, person1.getAllergies()));
+        assertTrue(person1.isNotTooAllergic(diet));
     }
 
     //Req 2c
@@ -128,9 +174,13 @@ class PersonTest {
         Food food = new Food("Meat-mince", 100, false, FoodType.PROTEIN);
         allowedFood.add(food);
         Diet lowCarbDiet = new LowCarbDiet(50, "Weight-loss", allowedFood, false, 50);
-        Person person = new Person(food, allergies, lowCarbDiet, 40);
 
-        assertFalse(person.isMinWeightCompatible(lowCarbDiet));
+        try {
+            Person person = new Person(food, allergies, lowCarbDiet, 40);
+        }catch (IllegalArgumentException e){
+            assertEquals("Cannot follow the diet(VeganDiet or LowCarbDiet), because the persons weight is too low", e.getMessage());
+        }
+
     }
 
     @Test // Person weight under min-weight vegan-diet
@@ -140,9 +190,13 @@ class PersonTest {
         Food food = new Food("Raw-cake", 100, true, FoodType.FAT);
         allowedFood.add(food);
         Diet veganDiet = new VeganDiet(50, "Weight-loss", allowedFood, true, 50);
-        Person person = new Person(food, allergies, veganDiet, 40);
 
-        assertFalse(person.isMinWeightCompatible(veganDiet));
+        try {
+            Person person = new Person(food, allergies, veganDiet, 40);
+        }catch (IllegalArgumentException e){
+            assertEquals("Cannot follow the diet(VeganDiet or LowCarbDiet), because the persons weight is too low", e.getMessage());
+        }
+
     }
 
     @Test // Person over min-weight low-carb-diet
@@ -214,9 +268,12 @@ class PersonTest {
         Food food = new Food("Raw-cake", 100, true, FoodType.FAT);
         allowedFood.add(food);
         Diet hypercaloricDiet = new HypercaloricDiet(50, "Gain-weight", allowedFood, true, 75, 3000);
-        Person person = new Person(food, allergies, hypercaloricDiet, 100);
 
-        assertFalse(person.isMaxWeightCompatible(hypercaloricDiet));
+        try {
+            Person person = new Person(food, allergies, hypercaloricDiet, 80);
+        }catch (IllegalArgumentException e){
+            assertEquals("Cannot follow the HypercaloricDiet, because the persons weight is too high", e.getMessage());
+        }
     }
 
 
@@ -290,18 +347,16 @@ class PersonTest {
     }
 
     @Test //CompatibleValidator
-        //Person compatible with diet/fulfills meets the req for the diet
+        //Person compatible with diet/ meets the req for the diet
     void testCompatibilityValidator_1e(){
         ArrayList<Food> allergies = new ArrayList<>();
         ArrayList<Food> allowedFood = new ArrayList<>();
         Food food = new Food("Raw-cake", 100, true, FoodType.FAT);
         allowedFood.add(food);
         Diet veganDiet = new VeganDiet(30, "Healthy-lifestyle", allowedFood, true, 80);
+        Person person = new Person(food, allergies, veganDiet, 80);
 
-        try {
-            Person person = new Person(food, allergies, veganDiet, 70);
-        }catch (IllegalArgumentException e){
-            System.out.println("YO");
-        }
+        assertEquals(veganDiet, person.getDiet());
+
     }
 }

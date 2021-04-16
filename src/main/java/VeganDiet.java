@@ -9,7 +9,13 @@ public class VeganDiet extends Diet{
         restrictOnlyVeganFood(allowedFood);
     }
 
-    public static void restrictOnlyVeganFood(List<Food> foods){}
+    public void restrictOnlyVeganFood(List<Food> allowedFood){
+        for (Food food: allowedFood) {
+            if (!food.isVegan()) {
+                throw new IllegalArgumentException("You can not include non-vegan food");
+            }
+        }
+    }
 
     public float getMinWeightKg() {
         return minWeightKg;

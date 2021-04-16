@@ -6,30 +6,29 @@ public class Person {
     private Diet diet;
     private float weight;
 
-    /*
-    Forslag:
-        - to constructors:
-            1. setter alle fire attributter. Diet bruker setDiet-metode
-            2. setter kun tre attributter, ekskluderer Diet
-        - setDiet
-            skal ha en check-metode
-
-     */
+    public Person(Food favoriteFood, List<Food> allergies, float weight) {
+        this.favoriteFood = favoriteFood;
+        this.allergies = allergies;
+        this.weight = weight;
+    }
 
     public Person(Food favoriteFood, List<Food> allergies, Diet diet, float weight) {
         this.favoriteFood = favoriteFood;
         this.allergies = allergies;
         this.weight = weight;
-        compatibilityValidator(favoriteFood, allergies, diet, weight);
+        setDiet(diet);
+    }
+
+    public void setDiet(Diet diet) {
+        compatibilityValidator(diet);
         this.diet = diet;
     }
 
-    public void compatibilityValidator(Food favoriteFood, List<Food> allergies, Diet diet, float weight){
-
-        if (!isVeganDietCompatible(diet, favoriteFood)){
+    public void compatibilityValidator(Diet diet){
+        if (!isVeganDietCompatible(diet)){
             throw new IllegalArgumentException("Cannot follow the VeganDiet, because favorite foods is non-vegan");
         }
-        if(!isNotTooAllergic(diet, allergies)){
+        if(!isNotTooAllergic(diet)){
             throw new IllegalArgumentException("Cannot follow the diet, because allergic to 50% or more of the food allowed by the diet");
         }
         if (!isMinWeightCompatible(diet)){
@@ -40,17 +39,17 @@ public class Person {
         }
     }
 
-    public boolean isVeganDietCompatible(Diet d, Food favoriteFood){
-        if (!favoriteFood.isVegan() && d instanceof VeganDiet)
+    public boolean isVeganDietCompatible(Diet d){
+        if (!this.favoriteFood.isVegan() && d instanceof VeganDiet)
             return false;
         return true;
     }
 
-    public boolean isNotTooAllergic(Diet diet, List<Food> allergies ){
+    public boolean isNotTooAllergic(Diet diet){
         double numberOfAllergicMatch = 0;
         double numberOfAllowedFood = diet.getAllowedFood().size();
 
-        for (Food allergyFood : allergies) {
+        for (Food allergyFood : this.allergies) {
             for (Food dietFood: diet.getAllowedFood()) {
                 if(allergyFood.getName().equals(dietFood.getName()))
                     numberOfAllergicMatch++;
@@ -83,19 +82,6 @@ public class Person {
         return true;
     }
 
-    public boolean maxPersonWeight(Diet d){
-        if (d instanceof HypercaloricDiet){
-            HypercaloricDiet h = (HypercaloricDiet)d;
-            if (h.getMaxWeightKg() < weight){
-                return false;
-            }
-        }
-        return true;
-    }
-
-
-
-
     public List<Food> getAllergies() {
         return allergies;
     }
@@ -114,9 +100,6 @@ public class Person {
 
     public Diet getDiet() { return diet; }
 
-    public void setDiet(Diet diet) {
-        this.diet = diet;
-    }
 
     public float getWeightKg() {
         return weight;
