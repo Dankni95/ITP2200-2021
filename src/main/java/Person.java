@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Person {
@@ -57,6 +58,20 @@ public class Person {
         }
         return !(numberOfAllergicMatch / numberOfAllowedFood * 100 >= 50);
     }
+
+    public List<Food> getListOfNonAllergicAllowedFood(List<Food> foodArray){
+        ArrayList <Food> nonAllergicAllowedFoods = new ArrayList<>();
+        List <Food> allowedFoodNotchanged = foodArray;
+
+        for (Food allowedFood : foodArray){
+            for (Food allergyFood : this.allergies) {
+                if (allowedFood.getName().equals(allergyFood.getName()))
+                    allowedFoodNotchanged.remove(allowedFood);
+            }
+        }
+        return allowedFoodNotchanged;
+    }
+
 
     // If they weigh more than the limit set by the HypercaloricDiet, they cannot be following this diet (for health reasons).
     public boolean isMaxWeightCompatible(Diet diet){

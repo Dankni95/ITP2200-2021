@@ -16,6 +16,7 @@ public abstract class Diet {
         hasOnlyVeganFood();
     }
 
+
     public String writeDuration(){
         return "This " + getClass().getName() + " lasts for " +
                 calculateDuration().getYears() + " years, " +
