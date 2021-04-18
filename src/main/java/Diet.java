@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class Diet {
     private int daysDuration;
@@ -23,12 +24,21 @@ public abstract class Diet {
                 calculateDuration().getMonths() + " months and " +
                 calculateDuration().getDays() +" days";
     }
+
     public String writeAllowedFood(){
-        checkAllowedFood(allowedFood);
-        return "return allowed food as string";
+
+         return "The following food is allowed in this " + getClass().getName() + ": " + formatAllowedFood();
     }
 
-    public  void checkAllowedFood(List<Food> allowedFood){}
+    public String formatAllowedFood(){
+
+        List<String> allowedFoodNames = allowedFood.stream().map(Food::getName).collect(Collectors.toList());
+
+       return allowedFoodNames.stream()
+                .map(foodName -> Character.toUpperCase(foodName.charAt(0)) + foodName.substring(1))
+                .collect(Collectors.toList()).toString().substring(1, allowedFoodNames.toString().length() - 1);
+    }
+
 
     public Period calculateDuration(){
         LocalDate parsedDuration = LocalDate.now().plusDays(daysDuration);
