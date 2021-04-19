@@ -3,16 +3,12 @@ import java.util.Random;
 
 public class DietManager {
 
-
-    //4. A
     public boolean areCompatible(Person person, Diet diet) {
-        return person.isVeganDietCompatible(diet) &&
-                person.isMinWeightCompatible(diet) &&
-                person.isMaxWeightCompatible(diet) &&
-                person.isNotTooAllergic(diet);
+        if (person.isVeganDietCompatible(diet) && person.isMinWeightCompatible(diet) && person.isMaxWeightCompatible(diet) && person.isNotTooAllergic(diet))
+            return true;
+        return false;
     }
 
-    //4. B
     public HypercaloricDiet randomDiet(Person person, List<Food> foods) {
         int randomNumbBetween1And100 = getRandomNumber(0,100);
         String purpose = "Random diet";
@@ -28,7 +24,6 @@ public class DietManager {
 
 
     }
-        // validating random numbers range implementation .. this is pretty weird tho.. maybe not needed?
 
     public void validateRandomCaloriesCorrectRange() {
         for (int i = 0; i < 100; i++) {

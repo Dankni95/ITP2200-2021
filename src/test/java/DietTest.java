@@ -12,7 +12,6 @@ class DietTest {
     @BeforeEach
     public void setupAll() {
 
-
         //Vegan diet
         veganFood1 = new Food("Vegan-lasagne", 100, true, FoodType.RECIPE);
         veganFood2 = new Food("Falafel", 100, true, FoodType.CARB);

@@ -10,6 +10,8 @@ class DietManagerTest {
     Food favorteFood, food1, food2, food3, food4, food5, food6;
     Person randomPerson;
     DietManager manager;
+    Diet diet1;
+    Diet diet2;
 
     @BeforeEach
     public void setupAll() {
@@ -27,8 +29,21 @@ class DietManagerTest {
         randomPerson = new Person(favorteFood, allergies, 50);
         manager = new DietManager();
         randomPerson.setDiet(manager.randomDiet(randomPerson, allowedFoods));
+        diet1 = new LowCarbDiet(30, "something", allowedFoods, false, 50);
+        diet2 = new LowCarbDiet(30, "something", allowedFoods, false, 60);
     }
 
+    //Person and diet is compatible
+    @Test
+    public void testAreCompatible_1a(){
+        assertTrue(manager.areCompatible(randomPerson, diet1));
+    }
+
+    //Person and diet is not compatible
+    @Test
+    public void testAreCompatible_1b(){
+        assertFalse(manager.areCompatible(randomPerson, diet2));
+    }
 
     @Test
     public void shouldNotThrowErrorWhenSettingDiet() {
