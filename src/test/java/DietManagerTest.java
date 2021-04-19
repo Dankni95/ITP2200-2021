@@ -1,6 +1,5 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,14 +31,14 @@ class DietManagerTest {
 
 
     @Test
-    public void shouldNotThrowError() {
+    public void shouldNotThrowErrorWhenSettingDiet() {
        assertDoesNotThrow(() ->  randomPerson.setDiet(manager.randomDiet(randomPerson, allowedFoods)));
    }
 
     @Test
     public void randomWeightShouldBeInRange(){
 
-        assertTrue(0 <= ( (HypercaloricDiet) randomPerson.getDiet()).getMaxWeightKg() &&  ( (HypercaloricDiet) randomPerson.getDiet()).getMaxWeightKg() < 220);
+        assertTrue(50 <= ( (HypercaloricDiet) randomPerson.getDiet()).getMaxWeightKg() &&  ( (HypercaloricDiet) randomPerson.getDiet()).getMaxWeightKg() < 70);
         System.out.println("Max weight: " +( (HypercaloricDiet) randomPerson.getDiet()).getMaxWeightKg());
     }
     @Test

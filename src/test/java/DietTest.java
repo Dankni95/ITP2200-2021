@@ -1,17 +1,11 @@
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.sonatype.inject.Nullable;
-
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class DietTest {
-    Diet veganDiet;
-    Diet hypercaloricDiet;
-    List<Food> veganDietFood;
-    List<Food> notVeganDietFood;
+    Diet veganDiet,hypercaloricDiet;
+    List<Food> veganDietFood,notVeganDietFood;
     Food veganFood1, veganFood2, veganFood3, veganFood4, veganFood5;
     Food notVeganFood1, notVeganFood2, notVeganFood3, notVeganFood4, notVeganFood5;
 
@@ -28,6 +22,7 @@ class DietTest {
 
         veganDietFood = List.of(veganFood1, veganFood2, veganFood3, veganFood4, veganFood5);
         veganDiet = new VeganDiet(220, "weight-loss", veganDietFood, false, 50);
+
         //Hypercaloric diet/Non-vegan
         notVeganFood1 = new Food("lasagna", 100, false, FoodType.RECIPE);
         notVeganFood2= new Food("pork-chop", 100, false, FoodType.CARB);
@@ -41,20 +36,17 @@ class DietTest {
         }
 
     @Test
-    public void hasOnlyVeganFood() {
-
+    public void shouldPassDietIsVegan() {
         assertTrue(veganDiet.isVegan());
-
 
     }
     @Test
     public void shouldPassDueToDietNotVegan() {
-
         assertFalse(hypercaloricDiet.isVegan());
     }
 
     @Test
-    public void shouldWriteOutStringCorrectly(){
+    public void shouldWriteOutDurationStringCorrectly(){
         assertAll("Should write out duration correctly",
                 () -> assertEquals("This " + veganDiet.getClass().getName() + " lasts for " +
                         veganDiet.calculateDuration().getYears() + " years, " +
@@ -101,8 +93,7 @@ class DietTest {
 
     @Test
     public void shouldNotThrowErrorWhenVeganDietDoesNotIncludeNonVeganFood() {
-
-        assertDoesNotThrow(() -> veganDiet = new VeganDiet(30, "weight-loss", veganDietFood, false, 50));
+        assertDoesNotThrow(() ->  new VeganDiet(30, "weight-loss", veganDietFood, false, 50));
 
     }
 
