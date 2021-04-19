@@ -38,27 +38,12 @@ class DietTest {
     @Test
     public void shouldPassDietIsVegan() {
         assertTrue(veganDiet.isVegan());
-
     }
     @Test
     public void shouldPassDueToDietNotVegan() {
         assertFalse(hypercaloricDiet.isVegan());
     }
 
-    @Test
-    public void shouldWriteOutDurationStringCorrectly(){
-        assertAll("Should write out duration correctly",
-                () -> assertEquals("This " + veganDiet.getClass().getName() + " lasts for " +
-                        veganDiet.calculateDuration().getYears() + " years, " +
-                        veganDiet.calculateDuration().getMonths() + " months and " +
-                        veganDiet.calculateDuration().getDays() +" days",   veganDiet.writeDuration()),
-                () -> assertEquals("This " + hypercaloricDiet.getClass().getName() + " lasts for " +
-                        hypercaloricDiet.calculateDuration().getYears() + " years, " +
-                        hypercaloricDiet.calculateDuration().getMonths() + " months and " +
-                        hypercaloricDiet.calculateDuration().getDays() +" days",   hypercaloricDiet.writeDuration())
-                );
-
-    }
     @Test
     public void shouldCalculateDurationCorrectly(){
         assertAll("Should calculate duration correctly",
@@ -67,7 +52,6 @@ class DietTest {
                 () -> assertEquals(6,   veganDiet.calculateDuration().getDays())
         );
     }
-
     @Test
     public void shouldWriteDurationCorrectlyToString(){
         assertAll("Should be correct String when writing out duration",
@@ -94,7 +78,6 @@ class DietTest {
     @Test
     public void shouldNotThrowErrorWhenVeganDietDoesNotIncludeNonVeganFood() {
         assertDoesNotThrow(() ->  new VeganDiet(30, "weight-loss", veganDietFood, false, 50));
-
     }
 
 }
