@@ -60,7 +60,6 @@ public class Person {
     }
 
     public List<Food> getListOfNonAllergicAllowedFood(List<Food> foodArray){
-
         foodArray.removeIf(allowed -> allergies.stream()
                 .anyMatch(allergy -> (allowed.getName().equals(allergy.getName()))));
         return foodArray;
@@ -117,6 +116,5 @@ public class Person {
     public void setWeightKg(float weight) {
         this.weight = weight;
     }
-
 
 }
