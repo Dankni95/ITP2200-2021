@@ -4,8 +4,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class VeganDietTest {
-    Diet failedVeganDiet;
-    List<Food> failedVeganDietFood;
+    List<Food> listWithNonVeganFood;
     Food failedVeganFood1, failedVeganFood2, failedVeganFood3, failedVeganFood4, failedVeganFood5;
 
     @BeforeEach
@@ -16,14 +15,12 @@ class VeganDietTest {
         failedVeganFood4 = new Food("Meat-mince", 100, false, FoodType.PROTEIN);
         failedVeganFood5 = new Food("Chocolate-Milk", 50, true, FoodType.PROTEIN);
 
-        failedVeganDietFood = List.of(failedVeganFood1, failedVeganFood2, failedVeganFood3, failedVeganFood4, failedVeganFood5);
+        listWithNonVeganFood = List.of(failedVeganFood1, failedVeganFood2, failedVeganFood3, failedVeganFood4, failedVeganFood5);
     }
         @Test
-        public void shouldThrowErrorNotVeganFoodInDiet(){
+        public void shouldThrowErrorWhenVeganDietHasNonVeganFood(){
 
-            assertThrows(RuntimeException.class, () -> {
-                failedVeganDiet = new VeganDiet(30, "weight-loss", failedVeganDietFood, true, 50);
-            });
+            assertThrows(RuntimeException.class, () -> new VeganDiet(30, "weight-loss", listWithNonVeganFood, true, 50));
         }
     }
 

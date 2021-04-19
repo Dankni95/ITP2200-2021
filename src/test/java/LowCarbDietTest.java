@@ -5,8 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LowCarbDietTest {
-    Diet lowCarbDiet;
-    List<Food> lowCarbDietFood, lowCarbDietFood2;
+    List<Food> lowCarbDietFoodTooManyCarbs, lowCarbDietFoodInRangeForCarbs;
     Food lowCarbFood1, lowCarbFood2, lowCarbFood3, lowCarbFood4, lowCarbFood5, lowCarbFood6;
 
     @BeforeEach
@@ -18,17 +17,15 @@ class LowCarbDietTest {
         lowCarbFood5 = new Food("Soy-Milk", 50, true, FoodType.CARB);
         lowCarbFood6 = new Food("Chickenwings", 50, true, FoodType.PROTEIN);
 
-        lowCarbDietFood = List.of(lowCarbFood1, lowCarbFood2, lowCarbFood3, lowCarbFood4, lowCarbFood5);
+        lowCarbDietFoodTooManyCarbs = List.of(lowCarbFood1, lowCarbFood2, lowCarbFood3, lowCarbFood4, lowCarbFood5);
     }
     @Test
-    public void shouldThrowErrorNotVeganFoodInDiet(){
-        assertThrows(RuntimeException.class, () -> {
-            lowCarbDiet = new LowCarbDiet(12, "Restrict-carbs", lowCarbDietFood, false, 50);
-        });
+    public void shouldThrowErrorIfTooManyCarbFoodTypes(){
+        assertThrows(RuntimeException.class, () -> new LowCarbDiet(12, "Restrict-carbs", lowCarbDietFoodTooManyCarbs, false, 50));
     }
     @Test
-    public void shouldFail() {
-        lowCarbDietFood2 = List.of(lowCarbFood1, lowCarbFood3,lowCarbFood5, lowCarbFood6);
-        assertDoesNotThrow(() -> lowCarbDiet = new LowCarbDiet(12, "Restrict-carbs", lowCarbDietFood2, false, 50));
+    public void shouldNotThrowErrorIsInRangeForFoodTypeCarb() {
+        lowCarbDietFoodInRangeForCarbs = List.of(lowCarbFood1, lowCarbFood3,lowCarbFood5, lowCarbFood6);
+        assertDoesNotThrow(() -> new LowCarbDiet(12, "Restrict-carbs", lowCarbDietFoodInRangeForCarbs, false, 50));
     }
 }

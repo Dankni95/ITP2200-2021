@@ -1,10 +1,7 @@
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -157,6 +154,43 @@ class PersonTest {
         Food food6 = new Food("Ribbe", 150, false, FoodType.PROTEIN);
 
         ArrayList<Food> allergies = new ArrayList<>(List.of(food1, food2, food3));
+        ArrayList<Food> allowedFoods = new ArrayList<>(List.of(food1, food4, food5));
+
+        Diet diet = new LowCarbDiet(11, "hh", allowedFoods, true, 75);
+
+        Person person1 = new Person(food1, allergies, diet, 75);
+
+        assertTrue(person1.isNotTooAllergic(diet));
+    }
+    @Test // Person with no allergies
+    void testIsNotTooAllergic_1d(){
+        Food food1 = new Food("Mais", 150, true, FoodType.PROTEIN);
+        Food food2 = new Food("Brokkoli", 150, true, FoodType.PROTEIN);
+        Food food3 = new Food("Gulrøtter", 150, true, FoodType.PROTEIN);
+        Food food4 = new Food("Agurk", 150, true, FoodType.PROTEIN);
+        Food food5 = new Food("Kjøttkaker", 150, false, FoodType.PROTEIN);
+        Food food6 = new Food("Ribbe", 150, false, FoodType.PROTEIN);
+
+        ArrayList<Food> allergies = new ArrayList<>();
+        ArrayList<Food> allowedFoods = new ArrayList<>(List.of(food1, food4, food5));
+
+        Diet diet = new LowCarbDiet(11, "hh", allowedFoods, true, 75);
+
+        Person person1 = new Person(food1, allergies, diet, 75);
+
+        assertTrue(person1.isNotTooAllergic(diet));
+    }
+
+    @Test // Person with 0% allergies
+    void testIsNotTooAllergic_1e(){
+        Food food1 = new Food("Mais", 150, true, FoodType.PROTEIN);
+        Food food2 = new Food("Brokkoli", 150, true, FoodType.PROTEIN);
+        Food food3 = new Food("Gulrøtter", 150, true, FoodType.PROTEIN);
+        Food food4 = new Food("Agurk", 150, true, FoodType.PROTEIN);
+        Food food5 = new Food("Kjøttkaker", 150, false, FoodType.PROTEIN);
+        Food food6 = new Food("Ribbe", 150, false, FoodType.PROTEIN);
+
+        ArrayList<Food> allergies = new ArrayList<>(List.of(food2, food3, food6));
         ArrayList<Food> allowedFoods = new ArrayList<>(List.of(food1, food4, food5));
 
         Diet diet = new LowCarbDiet(11, "hh", allowedFoods, true, 75);
@@ -378,11 +412,7 @@ class PersonTest {
         Person person = new Person(food, allergies, 80);
 
 
-        System.out.println(person.getListOfNonAllergicAllowedFood(allowedFoods).size());
-        for (Food foodtest : person.getListOfNonAllergicAllowedFood(allowedFoods)) {
-            System.out.println(foodtest.getName());
-        }
-
+        List <Food> nonAllergicAllowedFood = person.getListOfNonAllergicAllowedFood(allowedFoods);
 
     }
 }
