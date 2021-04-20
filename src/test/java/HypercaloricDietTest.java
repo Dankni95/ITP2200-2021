@@ -1,5 +1,1 @@
-import static org.junit.jupiter.api.Assertions.*;
-
-class HypercaloricDietTest {
-
-}
+class HypercaloricDietTest {}

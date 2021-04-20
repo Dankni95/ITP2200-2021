@@ -1,5 +1,7 @@
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class Diet {
     private int daysDuration;
@@ -10,48 +12,56 @@ public abstract class Diet {
     public Diet(int daysDuration, String purpose, List<Food> allowedFood, boolean isVegan) {
         this.daysDuration = daysDuration;
         this.purpose = purpose;
-        this.allowedFood = allowedFood; // this.allowedFood.add(allowedFood) maybe?
+        this.allowedFood = allowedFood;
         this.isVegan = isVegan;
-        hasOnlyVeganFood(allowedFood);
+        hasOnlyVeganFood();
     }
 
     public String writeDuration(){
-        calculateDuration(daysDuration);
-        return "Duration in string";
+        return "This " + getClass().getName() + " lasts for " +
+                calculateDuration().getYears() + " years, " +
+                calculateDuration().getMonths() + " months and " +
+                calculateDuration().getDays() +" days";
     }
+
     public String writeAllowedFood(){
-        checkAllowedFood(allowedFood);
-        return "return allowed food as string";
+         return "The following food is allowed in this " + getClass().getName() + ": " + formatAllowedFood();
     }
 
-    public static void checkAllowedFood(List<Food> allowedFood){}
+    public String formatAllowedFood(){
 
-    public static LocalDate calculateDuration(int daysDuration){ return LocalDate.now(); }
+        List<String> allowedFoodNames = allowedFood.stream().map(Food::getName).collect(Collectors.toList());
 
-    public static void hasOnlyVeganFood(List<Food> foods){}
-
-    public int getDaysDuration() {
-        return daysDuration;
+       return allowedFoodNames.stream()
+                .map(foodName -> Character.toUpperCase(foodName.charAt(0)) + foodName.substring(1))
+                .collect(Collectors.toList()).toString().substring(1, allowedFoodNames.toString().length() - 1);
     }
 
-    public void setDaysDuration(int daysDuration) {
-        this.daysDuration = daysDuration;
+    public Period calculateDuration(){
+        LocalDate parsedDuration = LocalDate.now().plusDays(daysDuration);
+        return LocalDate.now().until(parsedDuration);
+    }
+
+    public void hasOnlyVeganFood(){
+        for (Food food: allowedFood) {
+            if (!food.isVegan()) {
+                setVegan(false);
+                break;
+            }
+            else setVegan(true);
+        }
     }
 
     public String getPurpose() {
         return purpose;
     }
 
-    public void setPurpose(String purpose) {
-        this.purpose = purpose;
+    public int getDaysDuration() {
+        return daysDuration;
     }
 
     public List<Food> getAllowedFood() {
         return allowedFood;
-    }
-
-    public void setAllowedFood(List<Food> allowedFood) {
-        this.allowedFood = allowedFood;
     }
 
     public boolean isVegan() {
