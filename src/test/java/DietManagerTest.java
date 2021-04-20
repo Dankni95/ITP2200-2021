@@ -1,17 +1,18 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class DietManagerTest {
-    List<Food> allowedFoods,allergies;
+    List<Food> allowedFoods, allergies, nonAllergicAllowedFoods;
     Food favorteFood, food1, food2, food3, food4, food5, food6;
     Person randomPerson;
     DietManager manager;
-    Diet diet1;
-    Diet diet2;
+    Diet diet1, diet2;
+    HypercaloricDiet randomDiet;
 
     @BeforeEach
     public void setupAll() {
@@ -25,47 +26,37 @@ class DietManagerTest {
 
         allergies = new ArrayList<>(List.of(food1, food2, food3));
         allowedFoods = new ArrayList<>(List.of(food1, food4, food5));
+        nonAllergicAllowedFoods = new ArrayList<>(List.of(food4, food5));
+
 
         randomPerson = new Person(favorteFood, allergies, 50);
         manager = new DietManager();
-        randomPerson.setDiet(manager.randomDiet(randomPerson, allowedFoods));
+        randomDiet = manager.randomDiet(randomPerson, allowedFoods);
+
         diet1 = new LowCarbDiet(30, "something", allowedFoods, false, 50);
         diet2 = new LowCarbDiet(30, "something", allowedFoods, false, 60);
     }
 
     //Person and diet is compatible
     @Test
-    public void testAreCompatible_1a(){
+    public void testAreCompatible_1a() {
         assertTrue(manager.areCompatible(randomPerson, diet1));
     }
 
     //Person and diet is not compatible
     @Test
-    public void testAreCompatible_1b(){
+    public void testAreCompatible_1b() {
         assertFalse(manager.areCompatible(randomPerson, diet2));
     }
 
     @Test
-    public void shouldNotThrowErrorWhenSettingDiet() {
-       assertDoesNotThrow(() ->  randomPerson.setDiet(manager.randomDiet(randomPerson, allowedFoods)));
-   }
-
-    @Test
-    public void randomWeightShouldBeInRange(){
-
-        assertTrue(50 <= ( (HypercaloricDiet) randomPerson.getDiet()).getMaxWeightKg() &&  ( (HypercaloricDiet) randomPerson.getDiet()).getMaxWeightKg() < 70);
-        System.out.println("Max weight: " +( (HypercaloricDiet) randomPerson.getDiet()).getMaxWeightKg());
-    }
-    @Test
-    public void randomCaloriesShouldBeInRange(){
-
-        assertTrue(2000 < ( (HypercaloricDiet) randomPerson.getDiet()).getMinCaloriesPerDay() &&  ( (HypercaloricDiet) randomPerson.getDiet()).getMinCaloriesPerDay() < 4000);
-        System.out.println("Calories: " +( (HypercaloricDiet) randomPerson.getDiet()).getMinCaloriesPerDay());
-    }
-    @Test
-    public void randomDurationShouldBeInRange(){
-
-        assertTrue(0 <= ( (HypercaloricDiet) randomPerson.getDiet()).getDaysDuration() &&  ( (HypercaloricDiet) randomPerson.getDiet()).getDaysDuration() < 100);
-        System.out.println("Duration: " + ( (HypercaloricDiet) randomPerson.getDiet()).getDaysDuration());
+    public void testRandomDiet(){
+        assertTrue(randomDiet instanceof HypercaloricDiet);
+        assertTrue(1 <= randomDiet.getDaysDuration() && randomDiet.getDaysDuration() <= 100);
+        assertEquals("Random diet", randomDiet.getPurpose());
+        assertFalse(randomDiet.isVegan());
+        assertEquals(nonAllergicAllowedFoods, randomDiet.getAllowedFood());
+        assertTrue(50 <= randomDiet.getMaxWeightKg() && randomDiet.getMaxWeightKg() <= 70);
+        assertTrue(2000 <= randomDiet.getMinCaloriesPerDay() && randomDiet.getMinCaloriesPerDay() <= 4000);
     }
 }

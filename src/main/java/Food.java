@@ -15,18 +15,6 @@ public class Food {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public float getCaloriesPer100g() {
-        return caloriesPer100g;
-    }
-
-    public void setCaloriesPer100g(float caloriesPer100g) {
-        this.caloriesPer100g = caloriesPer100g;
-    }
-
     public boolean isVegan() {
         return isVegan;
     }
@@ -39,7 +27,4 @@ public class Food {
         return type;
     }
 
-    public void setType(FoodType type) {
-        this.type = type;
-    }
 }

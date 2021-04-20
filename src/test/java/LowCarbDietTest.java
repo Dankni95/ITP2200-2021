@@ -1,8 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class LowCarbDietTest {
     List<Food> lowCarbDietFoodTooManyCarbs, lowCarbDietFoodInRangeForCarbs;
@@ -19,10 +19,16 @@ class LowCarbDietTest {
 
         lowCarbDietFoodTooManyCarbs = List.of(lowCarbFood1, lowCarbFood2, lowCarbFood3, lowCarbFood4, lowCarbFood5);
     }
+
     @Test
     public void shouldThrowErrorIfTooManyCarbFoodTypes(){
-        assertThrows(RuntimeException.class, () -> new LowCarbDiet(12, "Restrict-carbs", lowCarbDietFoodTooManyCarbs, false, 50));
+        try {
+            new LowCarbDiet(12, "Restrict-carbs", lowCarbDietFoodTooManyCarbs, false, 50);
+        }catch (IllegalArgumentException e){
+            assertEquals("Cannot exceed more than 2 foods that are of carb type", e.getMessage());
+        }
     }
+
     @Test
     public void shouldNotThrowErrorIsInRangeForFoodTypeCarb() {
         lowCarbDietFoodInRangeForCarbs = List.of(lowCarbFood1, lowCarbFood3,lowCarbFood5, lowCarbFood6);

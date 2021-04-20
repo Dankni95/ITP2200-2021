@@ -12,11 +12,10 @@ public abstract class Diet {
     public Diet(int daysDuration, String purpose, List<Food> allowedFood, boolean isVegan) {
         this.daysDuration = daysDuration;
         this.purpose = purpose;
-        this.allowedFood = allowedFood; // this.allowedFood.add(allowedFood) maybe?
+        this.allowedFood = allowedFood;
         this.isVegan = isVegan;
         hasOnlyVeganFood();
     }
-
 
     public String writeDuration(){
         return "This " + getClass().getName() + " lasts for " +
@@ -26,7 +25,6 @@ public abstract class Diet {
     }
 
     public String writeAllowedFood(){
-
          return "The following food is allowed in this " + getClass().getName() + ": " + formatAllowedFood();
     }
 
@@ -39,45 +37,31 @@ public abstract class Diet {
                 .collect(Collectors.toList()).toString().substring(1, allowedFoodNames.toString().length() - 1);
     }
 
-
     public Period calculateDuration(){
         LocalDate parsedDuration = LocalDate.now().plusDays(daysDuration);
         return LocalDate.now().until(parsedDuration);
     }
 
-
     public void hasOnlyVeganFood(){
         for (Food food: allowedFood) {
             if (!food.isVegan()) {
-                isVegan = false;
+                setVegan(false);
                 break;
             }
-            else isVegan = true;
+            else setVegan(true);
         }
-    }
-
-    public int getDaysDuration() {
-        return daysDuration;
-    }
-
-    public void setDaysDuration(int daysDuration) {
-        this.daysDuration = daysDuration;
     }
 
     public String getPurpose() {
         return purpose;
     }
 
-    public void setPurpose(String purpose) {
-        this.purpose = purpose;
+    public int getDaysDuration() {
+        return daysDuration;
     }
 
     public List<Food> getAllowedFood() {
         return allowedFood;
-    }
-
-    public void setAllowedFood(List<Food> allowedFood) {
-        this.allowedFood = allowedFood;
     }
 
     public boolean isVegan() {

@@ -10,20 +10,12 @@ public class HypercaloricDiet extends Diet{
         this.minCaloriesPerDay = minCaloriesPerDay;
     }
 
-
     public float getMaxWeightKg() {
         return maxWeightKg;
-    }
-
-    public void setMaxWeightKg(float maxWeightKg) {
-        this.maxWeightKg = maxWeightKg;
     }
 
     public float getMinCaloriesPerDay() {
         return minCaloriesPerDay;
     }
 
-    public void setMinCaloriesPerDay(float minCaloriesPerDay) {
-        this.minCaloriesPerDay = minCaloriesPerDay;
-    }
 }

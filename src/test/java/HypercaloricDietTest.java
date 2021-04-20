@@ -1,3 +1,1 @@
-class HypercaloricDietTest {
-
-}
+class HypercaloricDietTest {}

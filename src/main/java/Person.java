@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class Person {
@@ -65,7 +64,6 @@ public class Person {
         return foodArray;
     }
 
-
     // If they weigh more than the limit set by the HypercaloricDiet, they cannot be following this diet (for health reasons).
     public boolean isMaxWeightCompatible(Diet diet){
         if(diet instanceof HypercaloricDiet){
@@ -94,27 +92,14 @@ public class Person {
         return allergies;
     }
 
-    public void setAllergies(List<Food> allergies) {
-        this.allergies = allergies;
-    }
-
     public Food getFavoriteFood() {
         return favoriteFood;
     }
 
-    public void setFavoriteFood(Food favoriteFood) {
-        this.favoriteFood = favoriteFood;
-    }
-
     public Diet getDiet() { return diet; }
-
 
     public float getWeightKg() {
         return weight;
-    }
-
-    public void setWeightKg(float weight) {
-        this.weight = weight;
     }
 
 }

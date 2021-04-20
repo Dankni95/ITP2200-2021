@@ -19,12 +19,16 @@ class FlexitarianDietTest {
 
         flexitarianDietFood = List.of(flexitarianFood1, flexitarianFood2, flexitarianFood3, flexitarianFood4, flexitarianFood5);
     }
+
     @Test
     public void shouldThrowErrorIfFlexiterianPreferredMeatIsVeganOrNotOfProteinType(){
-        assertThrows(RuntimeException.class, () -> {
-            flexitarianDiet = new FlexitarianDiet(30, "Less-Meat", flexitarianDietFood, false, 200, flexitarianFood4);
-        });
+        try {
+            new FlexitarianDiet(30, "Less-Meat", flexitarianDietFood, false, 200, flexitarianFood4);
+        }catch (IllegalArgumentException e){
+            assertEquals("The preferred meat in a FlexitarianDiet MUST be non-vegan food of protein type.", e.getMessage());
+        }
     }
+
     @Test
     public void shouldPassIfFlexiterianPreferredMeatIsNotVeganAndOfProteinType() {
         assertDoesNotThrow(() -> flexitarianDiet = new FlexitarianDiet(30, "Less-Meat", flexitarianDietFood, false, 200, flexitarianFood3));

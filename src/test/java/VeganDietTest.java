@@ -19,8 +19,11 @@ class VeganDietTest {
     }
         @Test
         public void shouldThrowErrorWhenVeganDietHasNonVeganFood(){
-
-            assertThrows(RuntimeException.class, () -> new VeganDiet(30, "weight-loss", listWithNonVeganFood, true, 50));
+            try {
+                new VeganDiet(30, "weight-loss", listWithNonVeganFood, true, 50);
+            }catch (IllegalArgumentException e){
+                assertEquals("You can not include non-vegan food in veganDiet", e.getMessage());
+            }
         }
     }
 

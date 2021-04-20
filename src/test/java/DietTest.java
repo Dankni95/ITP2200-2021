@@ -51,6 +51,7 @@ class DietTest {
                 () -> assertEquals(6,   veganDiet.calculateDuration().getDays())
         );
     }
+
     @Test
     public void shouldWriteDurationCorrectlyToString(){
         assertAll("Should be correct String when writing out duration",
@@ -58,6 +59,7 @@ class DietTest {
                 () -> assertEquals("This HypercaloricDiet lasts for 0 years, 3 months and 29 days",  hypercaloricDiet.writeDuration())
         );
     }
+
     @Test
     public void shouldWriteAllowedFoodCorrectly(){
         assertAll("Should be correct String output when writing out allowedFood",
