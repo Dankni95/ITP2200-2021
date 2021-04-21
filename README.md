@@ -15,3 +15,5 @@ Clone this project directly using:<br />
 ` git clone https://github.com/Dankni95/ITP2200-2021.git `<br /> 
 Import maven dependencies
 
+## Overall System design<br /> 
+![](https://i.imgur.com/HTTCcSe.png)
