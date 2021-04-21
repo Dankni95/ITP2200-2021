@@ -3,7 +3,7 @@
 _DietManagment: Easy program to manage diets with emphasis on software testing._
 
 ## Deliverables
-⋅⋅* [The SUT](https://www.google.com)
+* [The SUT](https://www.google.com)
 ⋅⋅* [The Tests](https://www.google.com)
 ⋅⋅* [The Test Plan](https://www.google.com)
 ⋅⋅* [Single method graph](https://www.google.com)
