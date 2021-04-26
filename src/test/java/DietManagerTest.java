@@ -11,7 +11,8 @@ class DietManagerTest {
     Food favorteFood, food1, food2, food3, food4, food5, food6;
     Person randomPerson;
     DietManager manager;
-    Diet diet1, diet2;
+    Diet diet1;
+    Diet diet2;
     HypercaloricDiet randomDiet;
 
     @BeforeEach
@@ -51,12 +52,12 @@ class DietManagerTest {
 
     @Test
     public void testRandomDiet(){
-        assertTrue(randomDiet instanceof HypercaloricDiet);
-        assertTrue(1 <= randomDiet.getDaysDuration() && randomDiet.getDaysDuration() <= 100);
-        assertEquals("Random diet", randomDiet.getPurpose());
-        assertFalse(randomDiet.isVegan());
-        assertEquals(nonAllergicAllowedFoods, randomDiet.getAllowedFood());
-        assertTrue(50 <= randomDiet.getMaxWeightKg() && randomDiet.getMaxWeightKg() <= 70);
-        assertTrue(2000 <= randomDiet.getMinCaloriesPerDay() && randomDiet.getMinCaloriesPerDay() <= 4000);
+            assertTrue(randomDiet instanceof HypercaloricDiet);
+            assertTrue(1 <= randomDiet.getDaysDuration() && randomDiet.getDaysDuration() <= 100);
+            assertEquals("Random diet", randomDiet.getPurpose());
+            assertFalse(randomDiet.isVegan());
+            assertEquals(nonAllergicAllowedFoods, randomDiet.getAllowedFood());
+            assertTrue(50 <= randomDiet.getMaxWeightKg() && randomDiet.getMaxWeightKg() <= 70);
+            assertTrue(2000 <= randomDiet.getMinCaloriesPerDay() && randomDiet.getMinCaloriesPerDay() <= 4000);
     }
 }
