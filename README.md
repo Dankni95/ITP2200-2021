@@ -19,6 +19,7 @@ Import maven dependencies if asked.
 2. Open the project in your IDE
 3. Go to Edit configurations <br /> 
 -> Add new configuration [+] <br /> 
+-> Choose jUnit <br /> 
 -> Add name -> Choose JDK Version (Coded in 15, should be compatible with all) <br /> 
 -> Dropdown choose "All Packages"<br /> 
 -> Run all tests<br /> 
