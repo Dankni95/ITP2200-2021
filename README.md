@@ -4,16 +4,29 @@ _DietManager is an easy program to manage diets with emphasis on software testin
 ## Deliverables
 - [ ] [The SUT](/src/main/java/)
 - [ ] [The Tests](/src/test/java/)
-- [ ] [The Test Plan](/Documentation/Project%20plan.pdf)
+- [ ] [The Test Plan](https://github.com/Dankni95/ITP2200-2021/blob/master/Documentation/Project%20plan.pdf)
 - [ ] [Single Method Graph](/Documentation/Graph.pdf)
 - [ ] [Group Reflection Note](/Documentation/Reflection%20note.pdf)
 - [ ] [Individual Reflection notes](/Documentation/Individual%20reflection%20notes/)
 
 
-# Installation
+## Installation
 Clone this project directly using:<br /> 
 ` git clone https://github.com/Dankni95/ITP2200-2021.git `<br /> 
-Import maven dependencies
+Import maven dependencies if asked.
+### Manual installation
+1. Unzip the SUT
+2. Open the project in your IDE
+3. Go to Edit configurations <br /> 
+-> Add new configuration [+] <br /> 
+-> Add name -> Choose JDK Version (Coded in 15, should be compatible with all) <br /> 
+-> Dropdown choose "All Packages"<br /> 
+-> Run all tests<br /> 
+
+![](https://i.imgur.com/yvMcjD5.png)
+
+
+
 
 ## Overall System design<br /> 
 ![](https://i.imgur.com/HTTCcSe.png)
