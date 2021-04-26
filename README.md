@@ -2,11 +2,12 @@
 _DietManager is an easy program to manage diets with emphasis on software testing. DietManager is created for course in Introduction to Software Testing (ITP2200). References: The system requirement and overall design is defined in the exam document Exam-April-2021.pdf._
 
 ## Deliverables
-- [ ] [The SUT](https://www.google.com)
-- [ ] [The Tests](https://www.google.com)
-- [ ] [The Test Plan](https://www.google.com)
-- [ ] [Single method graph](https://www.google.com)
-- [ ] [Individual Reflection notes](https://www.google.com)
+- [ ] [The SUT](/src/main/java/)
+- [ ] [The Tests](/src/test/java/)
+- [ ] [The Test Plan](/Documentation/Project%20plan.pdf)
+- [ ] [Single Method Graph](/Documentation/Graph.pdf)
+- [ ] [Group Reflection Note](/Documentation/Reflection%20note.pdf)
+- [ ] [Individual Reflection notes](/Documentation/Individual%20reflection%20notes/)
 
 
 # Installation
