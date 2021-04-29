@@ -22,10 +22,18 @@ Import maven dependencies if asked.
 -> Choose jUnit <br /> 
 -> Add name <br /> 
 -> Choose JDK Version (Coded in 15, should be compatible with all) <br /> 
--> Dropdown choose "All Packages"<br /> 
+-> Dropdown choose "All in Package"<br /> 
 -> Run all tests<br /> 
 
 ![](https://i.imgur.com/yvMcjD5.png)
+
+#### Troubleshooting
+May need to change these setting when using other JDK version
+
+![](https://i.imgur.com/8oDeyTz.png)
+
+Press CTRL twice and run mvn clean install<br /> 
+Or run tests manually from the corresponding classes
 
 
 
